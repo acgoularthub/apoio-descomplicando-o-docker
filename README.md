@@ -10,7 +10,7 @@ O curso trata de uma uma trilha que inicia com os conhecimentos mais básicos so
 
 Script de instalação automatizada do docker:
 ```bash
-# curl -fsSL https://get.docker.com/ | bash
+curl -fsSL https://get.docker.com/ | bash
 ```
 
 * `docker version` --> Mostrar a versão do docker instalado.
