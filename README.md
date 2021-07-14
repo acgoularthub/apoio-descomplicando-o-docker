@@ -38,6 +38,30 @@ curl -fsSL https://get.docker.com/ | bash
 * `docker container inspect [CONTAINER ID]` --> Exibe o manifesto de montagem do container.
 * `docker image ls` --> Lista todas as imagens baixadas localmente.
 * `docker image build` --> Constrói uma imagem a partir de um dockerfile.
+  
+  Para criar um diretório do tipo "bind" procedemos da seguinte maneira:
+  ```bash
+  docker container run -ti --mount type=bind,src=/<diretório-fonte>,dst=/<diretório-destino> <imagem>
+  ```
+  Caso você queira que o diretório seja do tipo "Read Only", basta por mais uma "vírgula" seguida de `ro`, após o caminho destino.
+  
+   `[...] type=bind,src=/<diretório-fonte>,dst=/<diretório-destino>,ro <imagem>`
+
+* `docker volume ls` --> Lista os volumes criados
+* `docker volume create <nome-do-volume>` --> Cria um volume com o nome desejado.
+* `docker volume inspect <nome-do-volume>` --> Exibe informações sobre o volume.
+
+  Para criar um diretório do tipo "volume" procedemos da seguinte maneira:
+  ```bash
+  docker container run -ti --mount type=volume,src=<nome-do-volume>,dst=/<diretório-destino> <imagem>
+  ```
+  Caso você queira que o diretório seja do tipo "Read Only", basta por mais uma "vírgula" seguida de `ro`, após o caminho destino.
+  
+   `[...] type=volume,src=<nome-do-volume>,dst=/<diretório-destino>,ro <imagem>`
+
+* `docker container create <nome-da-imagem>` --> Cria o container sem iniciar.
+* `docker container prune` --> Exclui todos os containers que não estiverem em uso. O prune pode ser usado para imagens e volumes também, mas recomenda-se cautela ao utilizar em volumes.
+* 
 
 ### **Dockerfiles explicados**
 
@@ -81,3 +105,13 @@ O programa "stress", que foi instalado, é utilizado para estressar os recursos 
 `CMD` pode ser apenas uma vez em um dockerfile, com o objetivo de passar instruções. Nesse caso ele foi utilizado para executar o programa que foi baixado e instalado com o `RUN`.
 
 Essas foram explicações superficiais apenas com o objetivo de ter um meio de estudo e revisita das informações ganhas durante o curso. Provavelmente ainda irei alterar ou adicionar informações ao longo do curso.
+
+### **Comandos Linux que aprendi** 
+
+* `/<diretório> tar -cvf /<diretório-destino>/<nome-do-arquivo>.tar` --> Este comando empacota o diretório em um arquivo .tar. As flags `-c` de "Create", que vai criar o arquivo empacotado, `-v` de verboso, que mostrará todo o processo que está acontecendo aos fundos e `-f` de "file", necessário pra que a gente passe o arquivo que será criado.
+
+Foi utilizado durante as aulas na criação de um conteiner que "faz bacups" em um volume de dados criado previamente.
+
+```bash
+docker container run -ti --mount type=volume,src=<nome-do-volume>,dst=/<diretório-destino> --mount type=bind,src=<diretório-fonte> <imagem> tar -cvf /backup/bkp-banco.tar /data
+```
