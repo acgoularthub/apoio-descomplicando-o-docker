@@ -6,6 +6,16 @@ Este curso foi adquirido através de uma ação comunitária feita pelo [Jeferso
 
 O curso trata de uma uma trilha que inicia com os conhecimentos mais básicos sobre Containers, utilizando o [Docker](https://www.docker.com/), indo até um ponto onde o aluno possa manipular e utilizar o docker de maneira efetiva.
 
+### **Glossário do docker**
+
+* **Imagem**: Imagens Docker são arquivos compostos por vários sistemas de arquivos de camadas que ficam uma sobre as outras. Ela é a nossa base para construção de uma aplicação.
+* **Container**: Container é um ambiente isolado, ele usa o kernel do sistema hospedeiro como base e baixa apenas o que é necessario para o funcionamento das aplicações desejadas.
+* **Docker**: Um "container runtime" lançado em 2011, responsável pela criação e manipulação de containers. É um conjunto de ferramentas PaaS (Platform as a Service) que faz uma "virtualização" a nivel de SO.
+* **Dockerhub**: É o repositório padrão onde o docker procura por imagens. Também é possivel armazenar imagens próprias e tem boa integração com github. Em resumo, é um repositório de imagens docker.
+* **Docker compose**: É uma ferramenta que ajuda a definir e rodar aplicações multi-container de forma simplificada. Usa um arquivo YAML para configurar os serviços necessários para as aplicações e iniciar tudo com um único comando.
+* **Docker Swarm**: Solução nativa do Docker para sistemas de Clusters para containers Docker.
+* **Docker Volume**: Volume de dados isolados criados pelo docker que pode ser utilizado para persistir informações de containers.
+
 ### **Lista de comandos mais utilizados:**
 
 Script de instalação automatizada do docker:
