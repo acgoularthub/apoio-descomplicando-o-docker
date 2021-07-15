@@ -22,6 +22,9 @@ Script de instalação automatizada do docker:
 ```bash
 curl -fsSL https://get.docker.com/ | bash
 ```
+![Cheatsheet](imagens/Cheatsheet_#1.png)
+
+Imagem retirada da aba de [Cheatsheets](https://www.linuxtips.io/cheatsheet) do Linuxtips.
 
 * `docker version` --> Mostrar a versão do docker instalado.
 
