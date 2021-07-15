@@ -22,7 +22,7 @@ Script de instalação automatizada do docker:
 ```bash
 curl -fsSL https://get.docker.com/ | bash
 ```
-![Cheatsheet](imagens/Cheatsheet_#1.png)
+![Cheatsheet](/imagens/Cheatsheet__1.jpeg)
 
 Imagem retirada da aba de [Cheatsheets](https://www.linuxtips.io/cheatsheet) do Linuxtips.
 
