@@ -35,6 +35,29 @@ docker container run -d -p 5000:5000 --restart=always --name registry registry:2
 ```
 Esse registry serve para armazenar imagens localmente.
 
+**3.1.1 Subir uma imagem no registry local**
+
+Primeiro precisamos criar uma tag para a imagem:
+```bash
+docker image tag <id da imagem> localhost:5000/<nome da imagem>:<versão da imagem>
+```
+Em seguida precisamos das push no registry:
+```bash
+docker image push localhost:5001/<nome da imagem>:<versão da imagem>
+```
+**3.1.2 Registry com persistência local**
+
+Para testar a criação de um registry com persistência local, utilizando dos conhecimentos adquiridos até aqui, eu criei um volume com o docker:
+```bash
+docker volume create <nome_do_volume>
+```
+Em seguida subi o container do registry como sugere a documentação da imagem oficial, com uma pequena mudança:
+
+```bash
+docker run -d -p 5000:5000 --restart=always --mount type=volume,src=<nome_do_volume>,dst=/var/lib/registry --name <nome_do_container> registry:2.7
+```
+Os dados salvos localmente podem ser acessados em `/var/lib/docker/volumes/<nome_do_volume>/_data/docker/registry/v2/repositories`
+
 **3.2 Cheat Sheet**
 
 ![Cheatsheet](/imagens/Cheatsheet__1.jpeg)
