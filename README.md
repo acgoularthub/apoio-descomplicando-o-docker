@@ -191,6 +191,8 @@ Essas foram explicações superficiais apenas com o objetivo de ter um meio de e
 
 Foi utilizado durante as aulas na criação de um conteiner que "faz backups" em um volume de dados criado previamente.
 
+A seguir, o exemplo utilizado em aula.
+
 ```bash
 docker container run -ti --mount type=volume,src=<nome-do-volume>,dst=/<diretório-destino> --mount type=bind,src=<diretório-fonte> <imagem> tar -cvf /backup/bkp-banco.tar /data
 ```
