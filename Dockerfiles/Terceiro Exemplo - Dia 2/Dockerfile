@@ -1,5 +1,6 @@
-FROM python:3
+FROM golang
 
 WORKDIR /app
 ADD . /app
-ENTRYPOINT python3 $(ls *.py) 
+RUN go build -o goapp
+ENTRYPOINT ./goapp

@@ -6,7 +6,13 @@ Este curso foi adquirido através de uma ação comunitária feita pelo [Jeferso
 
 O curso trata de uma uma trilha que inicia com os conhecimentos mais básicos sobre Containers, utilizando o [Docker](https://www.docker.com/), indo até um ponto onde o aluno possa manipular e utilizar o docker de maneira efetiva.
 
-### **Glossário do docker**
+### **1. Aqui você irá encontrar (na ordem):**
+* 2. Glossário
+* 3. Lista de comando mais utilizado (cheatsheet, registry, outros)
+* 4. Dockerfiles explicados
+* 5. Comandos Linux que aprendi
+
+### **2. Glossário do docker**
 
 * **Imagem**: Imagens Docker são arquivos compostos por vários sistemas de arquivos de camadas que ficam uma sobre as outras. Ela é a nossa base para construção de uma aplicação.
 * **Container**: Container é um ambiente isolado, ele usa o kernel do sistema hospedeiro como base e baixa apenas o que é necessario para o funcionamento das aplicações desejadas.
@@ -16,12 +22,21 @@ O curso trata de uma uma trilha que inicia com os conhecimentos mais básicos so
 * **Docker Swarm**: Solução nativa do Docker para sistemas de Clusters para containers Docker.
 * **Docker Volume**: Volume de dados isolados criados pelo docker que pode ser utilizado para persistir informações de containers.
 
-### **Lista de comandos mais utilizados:**
+### **3. Lista de comandos mais utilizados:**
 
 Script de instalação automatizada do docker:
 ```bash
 curl -fsSL https://get.docker.com/ | bash
 ```
+**3.1 Criar um registry local**
+
+```bash
+docker container run -d -p 5000:5000 --restart=always --name registry registry:2
+```
+Esse registry serve para armazenar imagens localmente.
+
+**3.2 Cheat Sheet**
+
 ![Cheatsheet](/imagens/Cheatsheet__1.jpeg)
 
 Imagem retirada da aba de [Cheatsheets](https://www.linuxtips.io/cheatsheet) do Linuxtips.
@@ -76,7 +91,7 @@ Imagem retirada da aba de [Cheatsheets](https://www.linuxtips.io/cheatsheet) do 
 * `docker container prune` --> Exclui todos os containers que não estiverem em uso. O prune pode ser usado para imagens e volumes também, mas recomenda-se cautela ao utilizar em volumes.
 * 
 
-### **Dockerfiles explicados**
+### **4. Dockerfiles explicados**
 
 Dockerfiles são documentos de montagem onde são postos os parâmetros do que esperamos que esteja presente nas nossas imagens docker. Em outras palavras, ele serve como base para construir um container, permitindo definir um ambiente personalizado que pode ser utilizado com os mais diversos propósitos.
 
@@ -119,7 +134,35 @@ O programa "stress", que foi instalado, é utilizado para estressar os recursos 
 
 Essas foram explicações superficiais apenas com o objetivo de ter um meio de estudo e revisita das informações ganhas durante o curso. Provavelmente ainda irei alterar ou adicionar informações ao longo do curso.
 
-### **Comandos Linux que aprendi** 
+**4.1 Outras opções:**
+
+* ADD => Copia novos arquivos, diretórios, arquivos TAR ou arquivos remotos e os adicionam ao filesystem do container;
+
+* CMD => Executa um comando, diferente do RUN que executa o comando no momento em que está "buildando" a imagem, o CMD executa no início da execução do container;
+
+* LABEL => Adiciona metadados a imagem como versão, descrição e fabricante;
+
+* COPY => Copia novos arquivos e diretórios e os adicionam ao filesystem do container;
+
+* ENTRYPOINT => Permite você configurar um container para rodar um executável, e quando esse executável for finalizado, o container também será;
+
+* ENV => Informa variáveis de ambiente ao container;
+
+* EXPOSE => Informa qual porta o container estará ouvindo;
+
+* FROM => Indica qual imagem será utilizada como base, ela precisa ser a primeira linha do Dockerfile;
+
+* MAINTAINER => Autor da imagem; 
+
+* RUN => Executa qualquer comando em uma nova camada no topo da imagem e "commita" as alterações. Essas alterações você poderá utilizar nas próximas instruções de seu Dockerfile;
+
+* USER => Determina qual o usuário será utilizado na imagem. Por default é o root;
+
+* VOLUME => Permite a criação de um ponto de montagem no container;
+
+* WORKDIR => Responsável por mudar do diretório / (raiz) para o especificado nele;
+
+### **5. Comandos Linux que aprendi** 
 
 * `/<diretório> tar -cvf /<diretório-destino>/<nome-do-arquivo>.tar` --> Este comando empacota o diretório em um arquivo .tar. As flags `-c` de "Create", que vai criar o arquivo empacotado, `-v` de verboso, que mostrará todo o processo que está acontecendo aos fundos e `-f` de "file", necessário pra que a gente passe o arquivo que será criado.
 
