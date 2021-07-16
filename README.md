@@ -166,7 +166,7 @@ Essas foram explicações superficiais apenas com o objetivo de ter um meio de e
 
 * `/<diretório> tar -cvf /<diretório-destino>/<nome-do-arquivo>.tar` --> Este comando empacota o diretório em um arquivo .tar. As flags `-c` de "Create", que vai criar o arquivo empacotado, `-v` de verboso, que mostrará todo o processo que está acontecendo aos fundos e `-f` de "file", necessário pra que a gente passe o arquivo que será criado.
 
-Foi utilizado durante as aulas na criação de um conteiner que "faz bacups" em um volume de dados criado previamente.
+Foi utilizado durante as aulas na criação de um conteiner que "faz backups" em um volume de dados criado previamente.
 
 ```bash
 docker container run -ti --mount type=volume,src=<nome-do-volume>,dst=/<diretório-destino> --mount type=bind,src=<diretório-fonte> <imagem> tar -cvf /backup/bkp-banco.tar /data
