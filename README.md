@@ -6,8 +6,16 @@ Este curso foi adquirido através de uma ação comunitária feita pelo [Jeferso
 
 O curso trata de uma uma trilha que inicia com os conhecimentos mais básicos sobre Containers, utilizando o [Docker](https://www.docker.com/), indo até um ponto onde o aluno possa manipular e utilizar o docker de maneira efetiva.
 
+<center>
+
 ![certificate](imagens/certificate.jpeg)
-![badge](imagens/badge.jpeg)
+
+</center>
+<center> 
+
+![badge](imagens/badge.jpeg) 
+
+</center>
 
 ### **1. Aqui você irá encontrar (na ordem):**
 * 2. Glossário
