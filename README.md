@@ -11,6 +11,10 @@ O curso trata de uma uma trilha que inicia com os conhecimentos mais básicos so
 * 3. Lista de comando mais utilizado (cheatsheet, registry, outros)
 * 4. Dockerfiles explicados
 * 5. Comandos Linux que aprendi
+* 6. Docker-machine
+* 7. Docker Swarm
+* 8. Secrets
+* 9. Docker-compose
 
 ### **2. Glossário do docker**
 
@@ -196,3 +200,110 @@ A seguir, o exemplo utilizado em aula.
 ```bash
 docker container run -ti --mount type=volume,src=<nome-do-volume>,dst=/<diretório-destino> --mount type=bind,src=<diretório-fonte> <imagem> tar -cvf /backup/bkp-banco.tar /data
 ```
+
+* **ls -lhart /\<caminho>/** --> exibe todos os itens listados no diretório com seu tamanho, data, e permições de uma forma facil de se ler. 
+### **6. Docker-machine**
+
+Docker-machine é uma ferramenta utilizada para gerência distribuída, permite a instalação e gerência de docker hosts de uma forma rápida e fácil. Mais detalhes podem ser vistos na [página oficial](https://docs.docker.com/machine/) disponibilizada pela Docker docs.
+
+* Instalação (no linux, nesse meu caso, para outros SO, procurar na documentação):
+
+```bash
+base=https://github.com/docker/machine/releases/download/v0.16.0 \
+  && curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine \
+  && sudo mv /tmp/docker-machine /usr/local/bin/docker-machine \
+  && chmod +x /usr/local/bin/docker-machine
+```
+
+* `docker-machine version` --> Versão do docker-machine
+
+* `docker-machine create --driver <hypervisor/cloud_utilizado> <nome_escolhido>` --> cria um novo host 
+
+* `docker-machine ls` --> lista os hosts
+
+* `docker-machine env <nome do host>` --> lista as variáveis de ambiente
+
+* `docker-machine ip <nome do host>` --> Retorna o ip da máquina
+
+* `docker-machine ssh <nome do host>` --> conecta ao host
+
+* `docker-machine inspect <nome do host>` --> retorna o manifesto do host
+
+* `docker-machine stop <nome do host>` --> Para a máquina host criada
+
+* `docker-machine ls ` --> lista os hosts criados
+
+* `docker-machine start <nome do host>` --> inicia um host parado
+
+* `docker-machine rm <nome do host>` --> remove um host
+
+* `eval $(docker-machine env -u)` --> remove as variáveis de ambiente do host
+  
+### **7. Docker Swarm**
+
+Docker Swarm é um orquestrador de containers fornecido pela própria Docker, ele não tem todas as feramentas que muitos orquestradores, como o Kubernetes, por exemplo, forneceria, mas é simples de usar e para pequenas aplicações é mais que o suficiente (é utilizado até em grandes aplicações, na verdade).
+
+A seguir, uma lista com os comandos utilizados nas aulas:
+
+* **docker swarm init** --> Inicia o node master (caso tenha mais de uma interface de rede, o parâmetro `--advertise-addr` seguido do IP da interface a ser utilizada.)
+
+* **docker swarm join** --token <SWMTKN-1-100_SEU_TOKEN> <SEU_IP_MASTER:2377> --> adiciona a máquina como um novo nó do cluster
+
+* **docker node ls** --> Lista os nós reconhecidos
+
+* **docker swarm join-token manager** --> Exibe o token que pode ser utilizado para adicionar novos nós com status manager
+
+* **docker swarm join-token worker** --> Exibe o token que pode ser utilizado para adicionar novos nós com status worker
+
+* **docker node inspect <nome_do_nó>** --> Inspeciona o manifesto do determinado nó
+
+* **docker node promote <nome_do_nó>** --> Promove o determinado nó a master
+
+* **docker node demote <nome_do_nó>** --> Rebaixa o nó a worker
+
+* **docker swarm leave** --> Tira a maquina do cluster
+
+* **docker swarm leave** --force --> tira a maquina master do cluster
+
+* **docker node rm <nome_do_nó>** --> Remove o nó.
+
+* **docker service create --name <nome_da_aplicação> --replicas <número_de_réplicas> -p <porta_destino>:<porta_origem>  <nome_da_imagem>** --> Cria um service com X réplicas, expondo a porta Y na Y2 usando a imagem Z.
+
+* **docker service ls** --> Lista todos os services criados.
+
+* **docker service ps <nome_do_service>** --> Lista quantas réplicas estão ativas em cada nó.
+
+* **docker service inspect <nome_do_service>** --> Exibe o manifesto do service.
+
+* **docker service logs -f <nome-do-service>** --> Lista todos os logs gerados pelo service em todos os nós.
+
+* **docker service rm <nome_do_serviço>** --> remove o service ativo
+
+* **docker network create -d overlay <nome>** --> Uma rede overlay permite que os nós dentro do cluster possam trocar/buscar informações entre si com dns imbutido, sem a necessidade de buscar pelo ip, como acessar a página disponibilizada pelo nginx dentro de outro nó, por exemplo. A maior vantagem de criar uma rede overlay é que mesmo que os ips sejam alterados ao longo da criação/morte dos containers, o fato de o serviço resolver o nome da rede, no lugar do ip, garante que o serviço esteja sempre online.
+
+* **docker network ls** --> lista as redes criadas
+
+* **docker network inspect <nome_da_rede>** --> inspeciona a informações da rede citada
+
+* **docker service scale <nome_do_container>=<numero_de_réplicas>** --> Redefine o número de réplicas que aquele serviço terá.
+
+* **docker network rm <nome_da_rede>** --> remove a rede
+
+* **docker service update <OPCOES> <Nome_Service>** --> atualiza detalhes de um serviço em execução.
+  
+  **Obs. Todos os `inspect` podem ser adicionados do comando --pretty para facilitar a leitura de tudo.**
+### **8. Secrets**
+
+* **echo 'minha secret' | docker secret create -** --> Cria a secret com a saída do echo
+* **docker secret create <nome-da-secret> <arquivo-original>** --> cria uma secret a partir de um arquivo
+* **docker secret inspect <nome-da-secret>** --> Exibe informações da secret
+* **docker secret ls** --> exibe todas as secrets
+* **docker secret rm <nome-da-secret>** --> remove a secret
+* **docker service create --name <nome-do-app> --detach=false --secret <nome-da-secret>  <nome-do-app>:<versão-do-app>** --> 
+* **docker service update --secret-rm <nome-da-secret> --detach=false --secret-add source=db_pass_1,target=password app** --> 
+
+### **9. Docker-compose**
+
+Docker-compose é um arquivo `.yml` (YAML) que consegue definir e rodar aplicações multi-container com um simples comando.
+
+Você pode encontrar mais informações [aqui](https://docs.docker.com/compose/).
