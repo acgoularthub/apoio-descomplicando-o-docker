@@ -6,6 +6,9 @@ Este curso foi adquirido através de uma ação comunitária feita pelo [Jeferso
 
 O curso trata de uma uma trilha que inicia com os conhecimentos mais básicos sobre Containers, utilizando o [Docker](https://www.docker.com/), indo até um ponto onde o aluno possa manipular e utilizar o docker de maneira efetiva.
 
+![certificate](imagens/certificate.jpeg)
+![badge](imagens/badge.jpeg)
+
 ### **1. Aqui você irá encontrar (na ordem):**
 * 2. Glossário
 * 3. Lista de comando mais utilizado (cheatsheet, registry, outros)
@@ -307,3 +310,5 @@ A seguir, uma lista com os comandos utilizados nas aulas:
 Docker-compose é um arquivo `.yml` (YAML) que consegue definir e rodar aplicações multi-container com um simples comando.
 
 Você pode encontrar mais informações [aqui](https://docs.docker.com/compose/).
+
+O github para o exemplo 4 pode ser encontrado [aqui](https://github.com/badtuxx/giropops-monitoring).
